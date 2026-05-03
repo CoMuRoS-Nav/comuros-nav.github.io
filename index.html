@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CoMuRoS-Nav - Multi-Robot Navigation System</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">CoMuRoS-Nav</div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#demo">Videos</a></li>
+          <li><a href="#installation">Installation</a></li>
+          <li><a href="#usage">Tutorial</a></li>
+          <li><a href="#dataset">Dataset</a></li>
+          <li><a href="#publications">Paper</a></li>
+          <li><a href="#authors">Authors</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Home / Landing -->
+    <section id="home" class="section home">
+      <div class="hero-content">
+        <h1>CoMuRoS-Nav</h1>
+        <p class="hero-subtitle">Collaborative Multi-Robot Navigation with LLM-Based Dynamic Path Planning, Obstacle Avoidance, and Adaptive Formation Control</p>
+        <p class="authors-list">Suraj Borate · Bhavish Rai B · Madhu Vadali</p>
+        <p class="affiliation">IIT Gandhinagar</p>
+        <a href="#demo" class="cta-button">Watch Experiments</a>
+        <div style="margin-top: 2rem">
+          <a href="https://github.com/comuros-nav" class="cta-button secondary" target="_blank">View Repositories</a>
+          <a href="https://comuros.github.io" class="cta-button tertiary" target="_blank">CoMuRoS Project</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos -->
+    <section id="demo" class="section">
+      <div class="content-section">
+        <div class="section-header">
+          <h2 class="section-title">Experiment Videos</h2>
+          <p class="section-subtitle">Watch CoMuRoS-Nav in action across hardware and simulation experiments</p>
+        </div>
+
+        <div class="video-grid-wrapper">
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/9zOm0uG16YQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-content">
+              <h4>CoMuRoS-Nav Teaser Video</h4>
+            </div>
+          </div>
+
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/7QZDq5MSq1A" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-content">
+              <h4>Dynamic Obstacle Avoidance in Multi-Robot Navigation</h4>
+            </div>
+          </div>
+
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/UtOMZBV_mUQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-content">
+              <h4>Adaptive Formation Control During Navigation</h4>
+            </div>
+          </div>
+
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/RCi28zFyGT4" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-content">
+              <h4>LLM-Guided Path Replanning in Unknown Environments</h4>
+            </div>
+          </div>
+
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/GfmLSM3qX9k" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-content">
+              <h4>Heterogeneous Robot Team Navigation: Drone + Ground Robots</h4>
+            </div>
+          </div>
+
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/PTaiFttYWuo" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-content">
+              <h4>Ignoring Irrelevant Navigation Events</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Installation -->
+    <section id="installation" class="section">
+      <div class="content-section">
+        <div class="section-header">
+          <h2 class="section-title">Installation</h2>
+          <p class="section-subtitle">Setup instructions for installing CoMuRoS-Nav</p>
+        </div>
+
+        <div class="step">
+          <h3>Prerequisites</h3>
+          <ul>
+            <li>ROS 2 <strong>Humble Hawksbill</strong> (LTS, recommended)</li>
+            <li>Ubuntu 22.04 (Jammy Jellyfish)</li>
+            <li>Python 3.10+ (default with Ubuntu 22.04)</li>
+            <li>Nav2 Navigation Stack</li>
+            <li>Git</li>
+            <li>colcon build tool</li>
+          </ul>
+          <p><strong>Verify that ROS 2 is installed and sourced correctly:</strong></p>
+          <div class="code-block">
+            <pre><code># Check ROS 2 environment variables
+printenv | grep -i ROS
+
+# Expected output should include at least:
+# ROS_DISTRO=humble
+# ROS_VERSION=2
+# ROS_PYTHON_VERSION=3</code></pre>
+          </div>
+          <p>If <code>ROS_DISTRO=humble</code> is present, your ROS 2 environment is correctly set up and ready for <strong>CoMuRoS-Nav</strong>.</p>
+        </div>
+
+        <div class="step">
+          <h3>Step 1: Clone CoMuRoS (Required Dependency)</h3>
+          <p>CoMuRoS-Nav builds on top of the core <strong>CoMuRoS</strong> system. Clone it first:</p>
+          <div class="code-block">
+            <pre><code>cd ~/ros2_ws/src
+git clone https://github.com/comuros/comuros.git</code></pre>
+          </div>
+          <p>For more details on CoMuRoS, visit the <a href="https://comuros.github.io" target="_blank" rel="noopener" style="color: var(--primary-color); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--primary-color); padding-bottom: 1px;">CoMuRoS project page</a>.</p>
+        </div>
+
+        <div class="step">
+          <h3>Step 2: Clone CoMuRoS-Nav Repositories</h3>
+          <p>CoMuRoS-Nav consists of two separate packages. Clone both into your workspace:</p>
+          <div class="code-block">
+            <pre><code>cd ~/ros2_ws/src
+
+# Navigation Manager
+git clone https://github.com/comuros-nav/navigation-manager.git
+
+# Path Planner
+git clone https://github.com/comuros-nav/path-planner.git</code></pre>
+          </div>
+          <p>Your <code>src/</code> directory should now contain three folders: <code>comuros/</code>, <code>navigation-manager/</code>, and <code>path-planner/</code>.</p>
+        </div>
+
+        <div class="step">
+          <h3>Step 3: Install Dependencies</h3>
+          <div class="code-block">
+            <pre><code>cd ~/ros2_ws
+rosdep install --from-paths src --ignore-src -r -y
+
+# Install Python dependencies for each package
+pip install -r src/comuros/requirements.txt
+pip install -r src/navigation-manager/requirements.txt
+pip install -r src/path-planner/requirements.txt</code></pre>
+          </div>
+        </div>
+
+        <div class="step">
+          <h3>Step 4: Build the Packages</h3>
+          <div class="code-block">
+            <pre><code>cd ~/ros2_ws
+colcon build --symlink-install
+source install/setup.bash
+echo "source ~/ros2_ws/install/setup.bash" >> ~/.bashrc</code></pre>
+          </div>
+        </div>
+
+        <div class="step">
+          <h3>Step 5: Set API Keys</h3>
+          <p>You need at least one API key (OpenAI, Gemini, or XAI/Grok). Add them temporarily:</p>
+          <div class="code-block">
+            <pre><code>export OPENAI_API_KEY="your_openai_key"
+export GEMINI_API_KEY="your_gemini_key"
+export XAI_API_KEY="your_grok_key"</code></pre>
+          </div>
+          <p>Or permanently in <code>~/.bashrc</code>.</p>
+        </div>
+
+        <div class="step">
+          <h3>Step 6: Run the System</h3>
+          <p>After CoMuRoS is running, start the CoMuRoS-Nav components in separate terminals:</p>
+          <div class="code-block">
+            <pre><code># Terminal A: Navigation Manager
+ros2 run navigation_manager navigation_manager
+
+# Terminal B: Path Planner (launch file)
+ros2 launch path_planner path_planner_system.launch.py
+
+# Terminal C: Path Planner node
+ros2 run path_planner path_planner_node4</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tutorial -->
+    <section id="usage" class="section">
+      <div class="content-section">
+        <div class="section-header">
+          <h2 class="section-title">CoMuRoS-Nav Tutorial</h2>
+          <p class="section-subtitle">Complete guide to running the multi-robot navigation system for custom applications</p>
+        </div>
+
+        <div class="step">
+          <h3>Running the Complete System</h3>
+          <p>CoMuRoS-Nav requires <strong>CoMuRoS</strong> running first, then the two CoMuRoS-Nav packages. Each component runs in its own terminal.</p>
+        </div>
+
+        <div class="step">
+          <h3>Terminal 1 — 4: Launch CoMuRoS</h3>
+          <p>Start the full CoMuRoS system first (simulation, robot LLMs, control services, and chat interface). Refer to the <a href="https://comuros.github.io#usage" target="_blank" rel="noopener" style="color: var(--primary-color); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--primary-color); padding-bottom: 1px; transition: opacity 0.2s ease;">CoMuRoS tutorial</a> for the exact commands. CoMuRoS-Nav depends on CoMuRoS being fully up before proceeding.</p>
+        </div>
+
+        <div class="step">
+          <h3>Terminal 5: Navigation Manager</h3>
+          <p>Runs the multi-robot navigation coordinator from the <code>navigation-manager</code> package:</p>
+          <div class="code-block">
+            <pre><code>ros2 run navigation_manager navigation_manager</code></pre>
+          </div>
+          <p><strong>What it does:</strong></p>
+          <ul>
+            <li>Subscribes to high-level navigation goals from CoMuRoS</li>
+            <li>Coordinates goal assignment across all active robots</li>
+            <li>Monitors robot states and handles goal completion callbacks</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <h3>Terminal 6 — 8: Path Planner</h3>
+          <p>The <code>path-planner</code> package can be launched two ways:</p>
+
+          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Option A — Launch file (recommended)</h4>
+          <div class="code-block">
+            <pre><code># Terminal 6: Launch path writer and request receiver
+ros2 launch path_planner path_planner_system.launch.py
+
+# Terminal 7: Start the core planner node
+ros2 run path_planner path_planner_node4</code></pre>
+          </div>
+
+          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Option B — Run nodes individually (3 terminals)</h4>
+          <p>Use this for debugging or when you need control over each component separately:</p>
+          <div class="code-block">
+            <pre><code># Terminal 6: Path writer — publishes computed paths
+ros2 run path_planner path_writer
+
+# Terminal 7: Path request receiver — listens for incoming goal requests
+ros2 run path_planner path_request_reciever
+
+# Terminal 8: Path planner node — core LLM-based planning logic
+ros2 run path_planner path_planner_node4</code></pre>
+          </div>
+          <p><strong>What each node does:</strong></p>
+          <ul>
+            <li><code>path_writer</code> — publishes the planned paths to the navigation stack</li>
+            <li><code>path_request_reciever</code> — receives goal requests from the navigation manager and queues them</li>
+            <li><code>path_planner_node4</code> — core node that uses the LLM to compute paths and trigger replanning on events</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <h3>Example Commands</h3>
+          <p>Once everything is running, command the navigation system through the CoMuRoS chat interface:</p>
+          <ul>
+            <li>"Navigate all robots to the exit"</li>
+            <li>"Scout the corridor ahead"</li>
+            <li>"Form a line formation and move forward"</li>
+            <li>"Avoid the obstacle on the left and replan"</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <h3>Package Structure</h3>
+          <div class="code-block">
+            <pre><code>~/ros2_ws/src/
+│
+├── comuros/                     # github.com/comuros/comuros  (required dependency)
+│   ├── chatty/                  # Chat + task manager
+│   ├── robot_llm/               # Per-robot LLM interfaces
+│   └── multi_robot/             # Simulation environment
+│
+├── navigation-manager/          # github.com/comuros-nav/navigation-manager
+│   ├── launch/
+│   ├── config/
+│   └── navigation_manager/
+│       ├── nav_manager.py       # Multi-robot goal coordinator
+│       └── formation_controller.py
+│
+└── path-planner/                # github.com/comuros-nav/path-planner
+    ├── launch/
+    ├── config/
+    └── path_planner/
+        ├── path_planner_llm.py  # LLM-based path planning
+        └── replanner.py         # Event-driven replanning</code></pre>
+          </div>
+        </div>
+
+        <div class="step">
+          <h3>Adding New Robots</h3>
+
+          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Step 1: Add Robot to Simulation</h4>
+          <p>Edit <code>multi_robot_nav/launch/multi_robot_nav.launch.py</code> and add your robot launch.</p>
+
+          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Step 2: Create Nav2 Configuration</h4>
+          <p>Add a Nav2 parameter file under <code>comuros_nav/config/</code> for your robot.</p>
+
+          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Step 3: Register Robot in Navigation Manager</h4>
+          <p>Edit <code>navigation_manager/navigation_manager.py</code> to include your robot's namespace and capabilities.</p>
+
+          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Step 4: Build and Test</h4>
+          <div class="code-block">
+            <pre><code>cd ~/ros2_ws
+colcon build --packages-select navigation_manager path_planner
+source install/setup.bash
+
+# Then run in order:
+ros2 run navigation_manager navigation_manager
+ros2 launch path_planner path_planner_system.launch.py</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dataset -->
+    <section id="dataset" class="section">
+      <div class="content-section">
+        <div class="section-header">
+          <h2 class="section-title">Dataset</h2>
+          <p class="section-subtitle">Benchmark for evaluating multi-robot navigation and path planning</p>
+        </div>
+        <div class="button-container">
+          <a href="https://drive.google.com/drive/folders/1i6ZupC1dC3AuS4vKeeRPAZpVnoHiibIK?usp=drive_link"
+            class="dataset-button"
+            target="_blank"
+            rel="noopener">
+            Google Drive
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications" class="section">
+      <div class="content-section">
+        <div class="section-header">
+          <h2 class="section-title">Paper</h2>
+        </div>
+
+        <div class="button-container">
+          <a href="https://arxiv.org/pdf/2511.22354"
+            class="paper-button"
+            target="_blank"
+            rel="noopener">
+            Read the PDF
+          </a>
+        </div>
+        <div class="bibtex-section">
+          <h3 class="bibtex-title">Citation</h3>
+          <div class="code-block">
+            <pre><code>@article{borate2025comuros_nav,
+  title={CoMuRoS-Nav: LLM-Based Multi-Robot Navigation with Dynamic Path Planning and Adaptive Formation Control},
+  author={Borate, Suraj and Rai B, Bhavish and Vadali, Madhu},
+  journal={arXiv preprint},
+  year={2025}
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Authors -->
+    <section id="authors" class="section">
+      <div class="content-section">
+        <div class="section-header">
+          <h2 class="section-title">Authors</h2>
+          <p class="section-subtitle">The team behind CoMuRoS-Nav</p>
+        </div>
+        <div class="authors-grid-3">
+
+          <div class="author-card">
+            <div class="author-photo-wrapper">
+              <img src="./images/suraj.png" alt="Suraj Borate" class="author-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="author-avatar-fallback">SB</div>
+            </div>
+            <h3>Suraj Borate</h3>
+            <p class="author-role">PhD Student</p>
+            <p class="author-dept">IIT Gandhinagar</p>
+            <div class="author-links">
+              <a href="https://linkedin.com/in/suraj-borate-72576323a" class="author-link linkedin" target="_blank">LinkedIn</a>
+              <a href="https://github.com/SurajBorate" class="author-link github" target="_blank">GitHub</a>
+              <a href="https://scholar.google.com/citations?user=Sn-GirkAAAAJ&hl=en&oi=ao" class="author-link scholar" target="_blank">Scholar</a>
+            </div>
+            <div class="author-email-display" onclick="copyAuthorEmail(this)" title="Click to copy">
+              <span>surajb@iitgn.ac.in</span>
+              <button class="email-copy-mini">Copy</button>
+            </div>
+          </div>
+
+          <div class="author-card">
+            <div class="author-photo-wrapper">
+              <img src="./images/bhavish.png" alt="Bhavish Rai B" class="author-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="author-avatar-fallback">BR</div>
+            </div>
+            <h3>Bhavish Rai B</h3>
+            <p class="author-role">Intern</p>
+            <p class="author-dept">IIT Gandhinagar</p>
+            <div class="author-links">
+              <a href="https://linkedin.com/in/bhavish-rai-b-761421231" class="author-link linkedin" target="_blank">LinkedIn</a>
+              <a href="https://github.com/braib" class="author-link github" target="_blank">GitHub</a>
+              <a href="https://braib.github.io" class="author-link website" target="_blank">Website</a>
+            </div>
+            <div class="author-email-display" onclick="copyAuthorEmail(this)" title="Click to copy">
+              <span>bhavishraib@gmail.com</span>
+              <button class="email-copy-mini">Copy</button>
+            </div>
+          </div>
+
+          <div class="author-card">
+            <div class="author-photo-wrapper">
+              <img src="./images/madhu.jpg" alt="Madhu Vadali" class="author-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="author-avatar-fallback">MV</div>
+            </div>
+            <h3>Madhu Vadali</h3>
+            <p class="author-role">Professor</p>
+            <p class="author-dept">IIT Gandhinagar</p>
+            <div class="author-links">
+              <a href="https://linkedin.com/in/madhuvadali" class="author-link linkedin" target="_blank">LinkedIn</a>
+              <a href="https://scholar.google.com/citations?user=kxNm_3sAAAAJ&hl=en" class="author-link scholar" target="_blank">Scholar</a>
+              <a href="https://iitgn.ac.in/faculty/me/9-madhu" class="author-link website" target="_blank">Website</a>
+            </div>
+            <div class="author-email-display" onclick="copyAuthorEmail(this)" title="Click to copy">
+              <span>madhu.vadali@iitgn.ac.in</span>
+              <button class="email-copy-mini">Copy</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="content-section">
+        <div class="section-header">
+          <h2 class="section-title">Contact</h2>
+          <p class="section-subtitle">Have questions about CoMuRoS-Nav? We'd love to hear from you</p>
+        </div>
+        <div class="contact-single">
+          <div class="contact-card">
+            <h3>CoMuRoS-Nav</h3>
+            <p>For research inquiries and collaborations</p>
+            <div class="email-copy-box" onclick="copyEmail(this)" title="Click to copy">
+              <span class="email-text">comuros-nav@gmail.com</span>
+              <button class="copy-icon-btn">⎘ Copy</button>
+            </div>
+            <span class="copy-feedback">✓ Copied to clipboard!</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="https://github.com/comuros-nav" target="_blank">Repositories</a>
+        <a href="#dataset">Dataset</a>
+        <a href="#publications">Paper</a>
+        <a href="https://comuros.github.io" target="_blank">CoMuRoS Project</a>
+      </div>
+      <p>&copy; 2026 CoMuRoS-Nav Project.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
