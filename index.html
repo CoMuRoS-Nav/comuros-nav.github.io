@@ -63,7 +63,7 @@
 
           <div class="video-item">
             <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/vhNiFQQzLLc" frameborder="0" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/9QmhTMsfcgM" frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="video-content">
               <h4>Hardware Experiment</h4>
@@ -72,7 +72,7 @@
 
           <div class="video-item">
             <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/watch?v=cg6ofWWMYac" frameborder="0" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/cg6ofWWMYac" frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="video-content">
               <h4>Simulation Experiment</h4>
@@ -189,7 +189,7 @@ export XAI_API_KEY="your_grok_key"</code></pre>
         </div>
 
         <div class="step">
-          <h3>Terminal 1 — 4: Launch CoMuRoS</h3>
+          <h3>Terminal 1 - 4: Launch CoMuRoS</h3>
           <p>Start the full CoMuRoS system first (simulation, robot LLMs, control services, and chat interface). Refer to the <a href="https://comuros.github.io#usage" target="_blank" rel="noopener" style="color: var(--primary-color); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--primary-color); padding-bottom: 1px; transition: opacity 0.2s ease;">CoMuRoS tutorial</a> for the exact commands. CoMuRoS-Nav depends on CoMuRoS being fully up before proceeding.</p>
         </div>
 
@@ -208,33 +208,33 @@ export XAI_API_KEY="your_grok_key"</code></pre>
         </div>
 
         <div class="step">
-          <h3>Terminal 6 — 8: Path Planner</h3>
+          <h3>Terminal 6 - 8: Path Planner</h3>
           <p>The <code>path-planner</code> package can be launched two ways:</p>
 
-          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Option A — Launch file (recommended)</h4>
+          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Option A - Launch file (recommended)</h4>
           <p>The launch file starts all three nodes together (<code>path_request_reciever</code>, <code>path_planner_node</code>, and <code>path_writer</code>) in a single command:</p>
           <div class="code-block">
             <pre><code># Terminal 6: Launch all path planner nodes at once
 ros2 launch path_planner path_planner_system.launch.py</code></pre>
           </div>
 
-          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Option B — Run nodes individually (3 terminals)</h4>
+          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Option B - Run nodes individually (3 terminals)</h4>
           <p>Use this for debugging or when you need control over each component separately:</p>
           <div class="code-block">
-            <pre><code># Terminal 6: Path writer — publishes computed paths
+            <pre><code># Terminal 6: Path writer - publishes computed paths
 ros2 run path_planner path_writer
 
-# Terminal 7: Path request receiver — listens for incoming goal requests
+# Terminal 7: Path request receiver - listens for incoming goal requests
 ros2 run path_planner path_request_reciever
 
-# Terminal 8: Path planner node — core LLM-based planning logic
+# Terminal 8: Path planner node - core LLM-based planning logic
 ros2 run path_planner path_planner_node</code></pre>
           </div>
           <p><strong>What each node does:</strong></p>
           <ul>
-            <li><code>path_writer</code> — publishes the planned paths to the navigation stack</li>
-            <li><code>path_request_reciever</code> — receives goal requests from the navigation manager and queues them</li>
-            <li><code>path_planner_node</code> — core node that uses the LLM to compute paths and trigger replanning on events</li>
+            <li><code>path_writer</code> - publishes the planned paths to the navigation stack</li>
+            <li><code>path_request_reciever</code> - receives goal requests from the navigation manager and queues them</li>
+            <li><code>path_planner_node</code> - core node that uses the LLM to compute paths and trigger replanning on events</li>
           </ul>
         </div>
 
@@ -351,10 +351,10 @@ ros2 run path_planner path_planner_node</code></pre>
         <div class="bibtex-section">
           <h3 class="bibtex-title">Citation</h3>
           <div class="code-block">
-            <pre><code>@article{borate2025comuros_nav,
-  title={CoMuRoS-Nav: LLM-Based Multi-Robot Navigation with Dynamic Path Planning and Adaptive Formation Control},
-  author={Borate, Suraj and Rai B, Bhavish and Vadali, Madhu},
-  journal={arXiv preprint},
+            <pre><code>@article{borate2025llm,
+  title={LLM-Based Generalizable Hierarchical Task Planning and Execution for Heterogeneous Robot Teams with Event-Driven Replanning},
+  author={Borate, Suraj and Pardeshi, Vipul and Vadali, Madhu and others},
+  journal={arXiv preprint arXiv:2511.22354},
   year={2025}
 }</code></pre>
           </div>
