@@ -63,49 +63,22 @@
 
           <div class="video-item">
             <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/7QZDq5MSq1A" frameborder="0" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/vhNiFQQzLLc" frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="video-content">
-              <h4>Dynamic Obstacle Avoidance in Multi-Robot Navigation</h4>
+              <h4>Hardware Experiment</h4>
             </div>
           </div>
 
           <div class="video-item">
             <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/UtOMZBV_mUQ" frameborder="0" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/watch?v=cg6ofWWMYac" frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="video-content">
-              <h4>Adaptive Formation Control During Navigation</h4>
+              <h4>Simulation Experiment</h4>
             </div>
           </div>
 
-          <div class="video-item">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/RCi28zFyGT4" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="video-content">
-              <h4>LLM-Guided Path Replanning in Unknown Environments</h4>
-            </div>
-          </div>
-
-          <div class="video-item">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/GfmLSM3qX9k" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="video-content">
-              <h4>Heterogeneous Robot Team Navigation: Drone + Ground Robots</h4>
-            </div>
-          </div>
-
-          <div class="video-item">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/PTaiFttYWuo" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="video-content">
-              <h4>Ignoring Irrelevant Navigation Events</h4>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -157,10 +130,10 @@ git clone https://github.com/comuros/comuros.git</code></pre>
             <pre><code>cd ~/ros2_ws/src
 
 # Navigation Manager
-git clone https://github.com/comuros-nav/navigation-manager.git
+git clone https://github.com/comuros-nav/navigation_manager.git
 
 # Path Planner
-git clone https://github.com/comuros-nav/path-planner.git</code></pre>
+git clone https://github.com/comuros-nav/path_planner.git</code></pre>
           </div>
           <p>Your <code>src/</code> directory should now contain three folders: <code>comuros/</code>, <code>navigation-manager/</code>, and <code>path-planner/</code>.</p>
         </div>
@@ -199,20 +172,6 @@ export XAI_API_KEY="your_grok_key"</code></pre>
           <p>Or permanently in <code>~/.bashrc</code>.</p>
         </div>
 
-        <div class="step">
-          <h3>Step 6: Run the System</h3>
-          <p>After CoMuRoS is running, start the CoMuRoS-Nav components in separate terminals:</p>
-          <div class="code-block">
-            <pre><code># Terminal A: Navigation Manager
-ros2 run navigation_manager navigation_manager
-
-# Terminal B: Path Planner (launch file)
-ros2 launch path_planner path_planner_system.launch.py
-
-# Terminal C: Path Planner node
-ros2 run path_planner path_planner_node4</code></pre>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -253,12 +212,10 @@ ros2 run path_planner path_planner_node4</code></pre>
           <p>The <code>path-planner</code> package can be launched two ways:</p>
 
           <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Option A — Launch file (recommended)</h4>
+          <p>The launch file starts all three nodes together (<code>path_request_reciever</code>, <code>path_planner_node</code>, and <code>path_writer</code>) in a single command:</p>
           <div class="code-block">
-            <pre><code># Terminal 6: Launch path writer and request receiver
-ros2 launch path_planner path_planner_system.launch.py
-
-# Terminal 7: Start the core planner node
-ros2 run path_planner path_planner_node4</code></pre>
+            <pre><code># Terminal 6: Launch all path planner nodes at once
+ros2 launch path_planner path_planner_system.launch.py</code></pre>
           </div>
 
           <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Option B — Run nodes individually (3 terminals)</h4>
@@ -271,13 +228,13 @@ ros2 run path_planner path_writer
 ros2 run path_planner path_request_reciever
 
 # Terminal 8: Path planner node — core LLM-based planning logic
-ros2 run path_planner path_planner_node4</code></pre>
+ros2 run path_planner path_planner_node</code></pre>
           </div>
           <p><strong>What each node does:</strong></p>
           <ul>
             <li><code>path_writer</code> — publishes the planned paths to the navigation stack</li>
             <li><code>path_request_reciever</code> — receives goal requests from the navigation manager and queues them</li>
-            <li><code>path_planner_node4</code> — core node that uses the LLM to compute paths and trigger replanning on events</li>
+            <li><code>path_planner_node</code> — core node that uses the LLM to compute paths and trigger replanning on events</li>
           </ul>
         </div>
 
@@ -297,50 +254,64 @@ ros2 run path_planner path_planner_node4</code></pre>
           <div class="code-block">
             <pre><code>~/ros2_ws/src/
 │
-├── comuros/                     # github.com/comuros/comuros  (required dependency)
-│   ├── chatty/                  # Chat + task manager
-│   ├── robot_llm/               # Per-robot LLM interfaces
-│   └── multi_robot/             # Simulation environment
+├── comuros/                          # github.com/comuros/comuros  (required dependency)
+│   ├── chatty/                       # Chat + task manager
+│   ├── robot_llm/                    # Per-robot LLM interfaces
+│   └── multi_robot/                  # Simulation environment
 │
-├── navigation-manager/          # github.com/comuros-nav/navigation-manager
-│   ├── launch/
-│   ├── config/
-│   └── navigation_manager/
-│       ├── nav_manager.py       # Multi-robot goal coordinator
-│       └── formation_controller.py
+├── navigation-manager/               # github.com/comuros-nav/navigation_manager
+│   ├── navigation_manager/           # Main package
+│   │   ├── data/                     # Maps, configs, formation data
+│   │   ├── navigation_manager/
+│   │   │   ├── navigation_manager.py # Multi-robot goal coordinator
+│   │   │   └── __init__.py
+│   │   ├── package.xml
+│   │   ├── setup.cfg
+│   │   └── setup.py
+│   ├── navigation_manager_interface/  # Custom ROS 2 message definitions
+│   │   ├── msg/
+│   │   │   ├── NavigationRobotRequest.msg
+│   │   │   ├── RobotGoalStatus.msg
+│   │   │   ├── RobotPath.msg
+│   │   │   ├── RobotPathArray.msg
+│   │   │   ├── CancelNavigationRequest.msg
+│   │   │   └── StopRobotsRequest.msg
+│   │   └── CMakeLists.txt
+│   └── requirements.txt
 │
-└── path-planner/                # github.com/comuros-nav/path-planner
-    ├── launch/
-    ├── config/
-    └── path_planner/
-        ├── path_planner_llm.py  # LLM-based path planning
-        └── replanner.py         # Event-driven replanning</code></pre>
+└── path-planner/                     # github.com/comuros-nav/path_planner
+    ├── path_planner/                 # Main package
+    │   ├── data/                     # Maps, configs, planner inputs
+    │   ├── launch/
+    │   │   └── path_planner_system.launch.py
+    │   ├── path_planner/
+    │   │   ├── path_planner_node.py  # Core LLM-based planning logic
+    │   │   ├── path_request_reciever.py
+    │   │   ├── path_writer.py
+    │   │   ├── agents.py
+    │   │   ├── si_rrt_enhanced_individual_kinodynamic.py
+    │   │   ├── heterogeneous_kinodynamic_formation_steering.py
+    │   │   ├── individual_kinodynamic_steering.py
+    │   │   └── __init__.py
+    │   ├── package.xml
+    │   ├── setup.cfg
+    │   └── setup.py
+    ├── path_planner_interface/        # Custom ROS 2 message definitions
+    │   ├── msg/
+    │   │   ├── PathPlannerRequest.msg
+    │   │   ├── RobotPath.msg
+    │   │   ├── RobotPathArray.msg
+    │   │   ├── RobotTrajectory.msg
+    │   │   ├── RobotTrajectoryArray.msg
+    │   │   ├── DiffDriveTrajectory.msg
+    │   │   ├── HoloTrajectory.msg
+    │   │   ├── RobotCmd.msg
+    │   │   └── RobotFleetCmd.msg
+    │   └── CMakeLists.txt
+    └── requirements.txt</code></pre>
           </div>
         </div>
 
-        <div class="step">
-          <h3>Adding New Robots</h3>
-
-          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Step 1: Add Robot to Simulation</h4>
-          <p>Edit <code>multi_robot_nav/launch/multi_robot_nav.launch.py</code> and add your robot launch.</p>
-
-          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Step 2: Create Nav2 Configuration</h4>
-          <p>Add a Nav2 parameter file under <code>comuros_nav/config/</code> for your robot.</p>
-
-          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Step 3: Register Robot in Navigation Manager</h4>
-          <p>Edit <code>navigation_manager/navigation_manager.py</code> to include your robot's namespace and capabilities.</p>
-
-          <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Step 4: Build and Test</h4>
-          <div class="code-block">
-            <pre><code>cd ~/ros2_ws
-colcon build --packages-select navigation_manager path_planner
-source install/setup.bash
-
-# Then run in order:
-ros2 run navigation_manager navigation_manager
-ros2 launch path_planner path_planner_system.launch.py</code></pre>
-          </div>
-        </div>
       </div>
     </section>
 
