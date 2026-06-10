@@ -127,3 +127,44 @@ function copyAuthorEmail(el) {
         setTimeout(() => { btn.textContent = 'Copy'; btn.style.background = ''; }, 2000);
     });
 }
+
+function showComingSoon(btn) {
+  // Avoid duplicate toasts
+  if (document.getElementById('coming-soon-toast')) return;
+
+  const toast = document.createElement('div');
+  toast.id = 'coming-soon-toast';
+  toast.textContent = 'Coming Soon!';
+  Object.assign(toast.style, {
+    position: 'fixed',
+    bottom: '2rem',
+    left: '50%',
+    transform: 'translateX(-50%) translateY(20px)',
+    background: '#1d4ed8',
+    color: 'white',
+    padding: '0.75rem 1.75rem',
+    borderRadius: '10px',
+    fontWeight: '600',
+    fontSize: '1rem',
+    boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
+    zIndex: '9999',
+    opacity: '0',
+    transition: 'opacity 0.3s ease, transform 0.3s ease',
+    pointerEvents: 'none',
+  });
+
+  document.body.appendChild(toast);
+
+  // Animate in
+  requestAnimationFrame(() => {
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+  });
+
+  // Animate out and remove
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-50%) translateY(20px)';
+    setTimeout(() => toast.remove(), 300);
+  }, 2200);
+}
